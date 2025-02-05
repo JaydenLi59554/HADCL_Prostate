@@ -61,7 +61,7 @@ d126 <- merge(d0206,D01[,c(1:5)],
               by.x = "pseudo_patient_key", by.y = "pseudo_patient_key")
 colnames(d126)
 
-### Calculate diagnosis age & diagnosis year & Age_group & diagnosis_year_group
+### Calculate diagnosis age & diagnosis year & Age_group
 str(d126[,c("dob_Y","reference_dtm")])
 d126$dob_Y <- as.Date(d126$dob_Y)
 d126$reference_dtm <- as.Date(d126$reference_dtm)
@@ -89,11 +89,7 @@ d126$dm_period[which(d126$dm_period <= 0)] <- 0
 summary(d126$dm_period)
 
 d126$death_date_Y <- as.Date(d126$death_date_Y)
-# table(d126$death_date_Y,useNA = "always")
-# 2010-01-01 2011-01-01 2012-01-01 2013-01-01 2014-01-01 2015-01-01 
-#      69        428       1255       2294       3234       4792       
-# 2016-01-01 2017-01-01 2018-01-01 2019-01-01 2020-01-01   <NA> 
-#     5955       7116       8303       9316      11050    115271 
+
 
 d126$death_date <- as.numeric(substr(d126[,"death_date_Y"],1,4))
 d126[is.na(d126$death_date),"death_date"] <- 9999 # set a number for patients living after 2020
@@ -141,7 +137,6 @@ head(d126$difftime)
 
 ### Order to find the shortest difftime
 d126.1 <- d126[order(d126$pseudo_patient_key,d126$difftime),]
-# d126.1[c(1:25),c(1,284,328,330,332,344)] # check
 
 ### Select the DM2 patients
 table(d126.1$dm_type_cd)
@@ -271,56 +266,6 @@ d126m[which(is.na(d126m$short_desc) == TRUE),"short_desc"] <- d126m[which(is.na(
 ### sort the first 20 cancer
 colnames(d126m)
 sort(table(d126m[,346]),decreasing = TRUE)[1:20]
-
-
-############################################
-### Select the shortest difftime records ###
-############################################
-
-d126m.sd <- aggregate(x = d126m, by = list(d126m$pseudo_patient_key),
-                      FUN = function(x) x[1])
-nrow(d126m.sd) #[1] 54910
-
-### Select the variables 
-a <- c("time","status","pseudo_patient_key", "family_dm_flag" ,  "ht_flag" ,     
-       "smoke_status_cd" , "alcohol_status_cd" , "insulin_flag"  ,  "anti_htn_flag" ,     
-       "anti_lipid_flag" , "bmi"  ,  "hba1c" ,  "fasting_gc" ,
-       "total_clt" ,"ldl_c"  , "hdl_c" , "triglyceride"  ,      
-       "serum_k"  , "creatinine" ,"dialysis_flag" ,"chd_flag" ,           
-       "stroke_flag" ,"pad_flag" , "ckd_cd" ,"central_obesity_flag",
-       "anti_diabetic_drug_flag", "oha_flag", "su_flag", "metf_flag",
-       "gluco_flag", "glita_flag", "megl_flag","dm_period","sex",
-       "diagnosis_Age", "Age_group","diagnosis_year","diagnosis_year_group","short_desc" )
-
-aaa <- rep(NA,length(a))
-for (i in 1:length(a)) {
-  aaa[i] <- which(colnames(d126m.sd) == a[i])
-}
-aaa
-
-dsd <- d126m.sd[,c(aaa)]
-colnames(dsd)
-view_df(dsd,show.frq = T,show.prc = T, show.na = T)
-# table(dsd$ht_flag,useNA = "always")
-
-##### classify the variable related to diabetic drug #####
-### check the missing value in seven variables related to diabetic drug
-VIM::aggr(dsd[,c(26:32)],prop = FALSE, number = TRUE)
-for (i in 26:32) {
-  dsd[is.na(dsd[,i]),i] <- ""
-}
-dsd$diabetic_drug <- ifelse(dsd$anti_diabetic_drug_flag == "Y" |
-                              dsd$oha_flag == "Y" |
-                              dsd$su_flag =="Y" |
-                              dsd$megl_flag == "Y" |
-                              dsd$gluco_flag == "Y" |
-                              dsd$glita_flag == "Y" |
-                              dsd$megl_flag == "Y",1,0)
-# dsd[1:10,c(26:32,40)] # check
-table(dsd$diabetic_drug,useNA = "always")
-colnames(dsd)
-write.csv(dsd,"C:/Users/dclapp159_02/Documents/earliestdata-126m_0202.csv",row.names = FALSE)
-
 
 
 ##########################################################################
@@ -810,31 +755,4 @@ colnames(dsd2)
 write.csv(dsd2,"C:/Users/dclapp159_02/Documents/earliestdata-replaced-126m_0202.csv",row.names = FALSE)
 
  
-
-#################################
-### Select the latest records ###
-#################################
-d126m.1 <- d126m
-d126m.1$assessment_dtm <- as.Date(d126m$assessment_dtm)
-d126m.2 <- d126m[order(d126m.1$pseudo_patient_key,d126m.1$assessment_dtm,decreasing = TRUE),]
-d126m.ld <- aggregate(x = d126m.2, by = list(d126m.2$pseudo_patient_key),
-                      FUN = function(x) x[1])
-nrow(d126m.ld) #[1] 54910
-
-dld <- d126m.ld[,c(aaa)]
-colnames(dld)
-for (i in 26:32) {
-  dld[is.na(dld[,i]),i] <- ""
-}
-dld$diabetic_drug <- ifelse(dld$anti_diabetic_drug_flag == "Y" |
-                              dld$oha_flag == "Y" |
-                              dld$su_flag =="Y" |
-                              dld$megl_flag == "Y" |
-                              dld$gluco_flag == "Y" |
-                              dld$glita_flag == "Y" |
-                              dld$megl_flag == "Y",1,0)
-
-table(dld$diabetic_drug,useNA = "always")
-colnames(dld)
-write.csv(dld,"C:/Users/dclapp159_02/Documents/latestdata-126m_0202.csv",row.names = FALSE)
 
