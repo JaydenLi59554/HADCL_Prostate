@@ -1,4 +1,5 @@
-Survival-Analysis-Clinical/
+**Survival-Analysis-Clinical**
+
 **R**
 Data preparation.R      # Data integration and cleaning
 Data processing.R       # Median survival time calculation 
