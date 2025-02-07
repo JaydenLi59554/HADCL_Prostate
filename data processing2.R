@@ -2,7 +2,7 @@ library(survminer)
 library(survex)
 library(AutoScore)
 library(knitr)
-
+ 
 # read file ---------------------------------------------------------------
 rm(list = ls())
 data <- read.csv("file_path/file_name.csv")
