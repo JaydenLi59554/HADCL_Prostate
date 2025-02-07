@@ -2,12 +2,16 @@
 
 **R**
 
-Data preparation.R      # Data integration and cleaning
+# Data integration and cleaning
+Data preparation.R        
 
-Data processing.R       # Median survival time calculation 
+# Median survival time calculation 
+Data processing.R         
 
-data processing2.R      # Risk scoring system construction
+# Risk scoring system construction
+data processing2.R        
 
 **Python**
 
-Model evaluation        # Survival model development and comparison
+# Survival model development and comparison
+Model evaluation          
