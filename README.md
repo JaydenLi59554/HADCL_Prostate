@@ -1,17 +1,17 @@
-**Survival-Analysis-Clinical**
+# Survival-Analysis-Clinical
 
-**R**
+## R
 
-# Data integration and cleaning
+### Data integration and cleaning
 Data preparation.R        
 
-# Median survival time calculation 
+### Median survival time calculation 
 Data processing.R         
 
-# Risk scoring system construction
+### Risk scoring system construction
 data processing2.R        
 
-**Python**
+## Python
 
-# Survival model development and comparison
+### Survival model development and comparison
 Model evaluation          
