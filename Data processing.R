@@ -23,8 +23,8 @@ load_data <- function(train_path, test_path) {
   return(list(train = train_data, test = test_data))
 }
 
-data1 <- load_data("C:/Users/LiZhaojun/Desktop/work/HADCL/Output/Demo_data_train.csv",
-          "C:/Users/LiZhaojun/Desktop/work/HADCL/Output/Demo_data_test.csv")
+data1 <- load_data("data_path/Demo_data_train.csv",
+          "data_path/Demo_data_test.csv")
 
 # Function for risk score analysis
 run_survival_analysis <- function(train_set, test_set) {
