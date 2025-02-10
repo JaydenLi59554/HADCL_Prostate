@@ -8,6 +8,7 @@ from sklearn.impute import KNNImputer
 from sksurv.util import Surv
 from sksurv.linear_model import CoxPHSurvivalAnalysis, CoxnetSurvivalAnalysis
 from sksurv.ensemble import RandomSurvivalForest, GradientBoostingSurvivalAnalysis
+from sksurv.metrics import concordance_index_censored  
 import shap
 import matplotlib.pyplot as plt
 
