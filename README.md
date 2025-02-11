@@ -1,6 +1,8 @@
 # Survival-Analysis-Clinical
 
 ## R
+Before setting up the package, users should have version 4.2.1 or higher, and several packages set up from CRAN.
+
 
 ### Data integration and cleaning
 **File:** `Data preparation.R`     
