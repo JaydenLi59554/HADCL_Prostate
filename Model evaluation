@@ -78,7 +78,7 @@ def shap_analysis(model, X_train, X_test, feature_names, output_path):
 # --------------------------
 if __name__ == "__main__":
     # Load data
-    data = load_and_preprocess("path/to/clinical_data.csv")
+    data = load_and_preprocess("path/to/Demo_data.csv")
     
     # Prepare survival data
     X = data.drop(columns=['time', 'status'])
