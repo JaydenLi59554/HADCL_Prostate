@@ -12,11 +12,11 @@ This part of the analysis calculates the median survival time for the patient co
 
 ### Risk scoring system construction
 **File:** `Data processing2.R`   
-This script develops a risk scoring system based on clinical and demographic factors. It uses statistical techniques to identify significant predictors of survival and assigns scores to each factor. The resulting risk scores can help stratify patients based on their likelihood of survival, aiding in clinical decision-making. The files named `Demo_data_train` and `Demo_data_test` were used to construct the risk score system.
+This script develops a risk-scoring system based on clinical and demographic factors. It uses statistical techniques to identify significant predictors of survival and assigns scores to each factor. The resulting risk scores can help stratify patients based on their likelihood of survival, aiding in clinical decision-making. The files named `Demo_data_train` and `Demo_data_test` were used to construct the risk score system.
 
 ---
 ## Python
 
 ### Survival model development and comparison
 **File:** `Model evaluation`          
- In this section, various survival models are developed and compared using Python. The focus is on evaluating different statistical techniques to find the best-fit model for predicting survival outcomes. This involves assessing model performance through metrics like concordance index and visualizations such as survival curves.
+ In this section, various survival models are developed and compared using Python. The focus is on evaluating different statistical techniques to find the best-fit model for predicting survival outcomes. This involves assessing model performance through metrics like concordance index and visualizations such as survival curves. The file `Demo_data` was used to develop and compare the survival model.
